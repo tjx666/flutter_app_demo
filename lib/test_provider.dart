@@ -22,8 +22,12 @@ class _TestProviderState extends State<TestProvider> {
   int activeTabIndex = 0;
 
   Widget _tabView(int index) {
-    final count = context.select<AppState, int>((state) => state.count);
-    return Text('tab view $index, count: $count');
+    return Selector<AppState, int>(
+      builder: (context, count, child) {
+        return Text('tab view $index, count: $count');
+      },
+      selector: (_, state) => state.count,
+    );
   }
 
   @override
